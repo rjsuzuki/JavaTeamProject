@@ -1,24 +1,18 @@
-import java.io.Serializable;
 import java.util.*;
 
-public class Student implements Serializable {
+public class Student  {
 
-  static final long serialVersionUID = -6588858836832007281L;
   private String firstName;
   private String lastName;
   private String userLogin;
-  private ArrayList<Course> courseList;
-
-  public void getRegisteredCourses() {
-    return courseList.getList();
-  }
+  private int studentSsn;
 
 
   //Constructor
-  Student(String a, String b, String c) {
+  Student(String a, String b, int c) {
     a = firstName;
     b = lastName;
-    c = userLogin;
+    c = studentSsn;
   }
 
   public String getFullName() {
@@ -41,8 +35,16 @@ public class Student implements Serializable {
     this.lastName = lastName;
   }
 
+  public int getStudentSsn() {
+    return studentSsn;
+  }
+
+  public void setStudentSsn(int ssn) {
+    studentSsn = ssn;
+  }
+
   public String toString() {
-    return firstName + " " + lastName + ", ";
+    return firstName + " " + lastName + ", " + studentSsn;
   }
 
 } //end of Class

@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Course implements Serializable {
+public class Course {
 
     //Course dates
     private int month;
@@ -17,9 +17,8 @@ public class Course implements Serializable {
     private int courseId;
     private Date startDate;
     private Date endDate;
-    private String courseName,
+    private String courseName;
     private String summary;
-    private int courseLimit = 10;
     private int studentsRegistered;
 
     public void register();
@@ -28,11 +27,10 @@ public class Course implements Serializable {
     public String getSummary();
 
 
-
     //Create an ArrayList for courses, must include alphabetization method
     private ArrayList<Student> studentList;
 
-    List<Student> studentList = new ArrayList<Student>();
+
 
     //constructors
 
@@ -55,9 +53,18 @@ public class Course implements Serializable {
       return endDate;
     }
 
+    public void setStartDate() {
+
+    }
+
+    public void setEndDate() {
+
+    }
+
     public String getCourseName() {
       return courseName;
     }
+
 
     public void setCourseId(int courseId) {
       this.courseId = courseId;
