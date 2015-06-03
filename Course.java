@@ -28,7 +28,7 @@ public class Course {
 
 
     //Create an ArrayList for courses, must include alphabetization method
-    private ArrayList<Student> studentList;
+    public ArrayList<Student> studentList;
 
 
 

@@ -14,6 +14,7 @@ public class RegistrationSystem {
     String lastName;
     String userLogin;
 
+    ArrayList<Student> studentList;
     private int courseMaxSize = 10;
     private int courseCurrentSize = 0;
 
@@ -59,7 +60,6 @@ public class RegistrationSystem {
         } catch (Exception e) {
           e.printStackTrace();
         }
-
     } //end of go()
 
     //*********************************To create a new User*************************************************
@@ -68,7 +68,7 @@ public class RegistrationSystem {
         try {
           userInputScanner = new Scanner(System.in);
 
-          //Prompt for User's name
+          //Prompt for User's info
           System.out.println("Please enter your first name: ");
           String userFirstName = userInputScanner.next();
 
@@ -85,16 +85,20 @@ public class RegistrationSystem {
           String userLogin = userInputScanner.next();
 
           //Instantiate a new User with User's input
-          Student userLogin = new Student (userFirstName, userLastName, foo);
+          Student student = new Student (userFirstName, userLastName, foo);
 
           //add new User to courseList
-          exampleArray.add(userLogin);
+          studentList.add(student);
 
           //save user's input to file
           File schoolRegistrar = new File("database.txt");
           fileScanner = new Scanner(schoolRegistrar);
 
           //validate if ssn = unique?
+
+          //Return screen to login page
+
+
           userInputScanner.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,6 +115,9 @@ public class RegistrationSystem {
           String login = userInputScanner.next();
 
           //open file and retrieve user info from database
+
+
+          //then
           userInputScanner.close();
       } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +134,7 @@ public class RegistrationSystem {
           System.out.println("To view available courses, press 1.");
           System.out.println("To view registered courses, press 2.");
           String courseOption = userInputScanner.next();
-          int number = Integer.parseInt(menuOption);
+          int number = Integer.parseInt(courseOption);
 
           if (number == 1) {
               //Show available courses + option to register for course.
