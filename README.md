@@ -3,6 +3,8 @@ for Java Class
 
 Student Registration System for Java Class
 
+the Program should show current registration numbers and available seats for each course. After a student successfully registes, the registration information should be stored in a file.
+
 system should:
 -ability for students to view an alphabetical list of courses
 -course includes course ID number, course dates, name, brief summary, and the enrollment limit, and number of students registered
