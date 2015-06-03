@@ -1,4 +1,4 @@
-
+//Originally created by Joan
 
     class Date {
     private int month;
