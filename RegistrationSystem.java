@@ -17,6 +17,7 @@ public class RegistrationSystem {
     ArrayList<Student> studentList;
     private int courseMaxSize = 10;
     private int courseCurrentSize = 0;
+    private CourseList courseList;
 
     public static void main(String[] args) {
         RegistrationSystem builder = new RegistrationSystem();
@@ -133,13 +134,72 @@ public class RegistrationSystem {
           System.out.println("Please choose from the following options");
           System.out.println("To view available courses, press 1.");
           System.out.println("To view registered courses, press 2.");
+          System.out.println("To register for course, press 3.");
+          System.out.println("To unregister for course, press 4.");
           String courseOption = userInputScanner.next();
           int number = Integer.parseInt(courseOption);
 
           if (number == 1) {
               //Show available courses + option to register for course.
+              // NOTE: which method is wanted here?
+              //courseList.viewCourseList();  // displays all courses
+              courseList.viewAvailableCourseList(); // displays courses w/ seats available
           } else if (number == 2) {
               //Show registered courses + option to un-register from course.
+          } else if (number == 3) {
+              System.out.println("Enter course id");
+              int courseId = Integer.parseInt(userInputScanner.next());
+              // NOTE: should be ssn or student id
+              System.out.println("Enter Social Security Number");
+              int ssn = Integer.parseInt(courseOption);
+              // Get student
+              Student student = null;
+              for(Student s: studentList) {
+                  if(s.getStudentSsn() == ssn) {
+                      student = s;
+                  }
+              }
+              if(student != null) {
+                  // Register for course
+                  boolean enrollmentStatus = courseList.registerForCourse(courseId, student);
+                  if(enrollmentStatus == false) {
+                      System.out.println("Student course registration failed");
+                  } else {
+                      System.out.println("Registered for course");
+                      // TODO: add course list to Student
+                      //student.addCourse(id);
+                  }
+              } else {
+                  // Failed to find student in studentList
+                  System.out.println("Could not find student enrolled.");
+              }
+          } else if (number == 4) {
+              System.out.println("Enter course id");
+              int courseId = Integer.parseInt(userInputScanner.next());
+              // NOTE: should be ssn or student id
+              System.out.println("Enter Social Security Number");
+              int ssn = Integer.parseInt(courseOption);
+              // Get student from social security number
+              Student student = null;
+              for(Student s: studentList) {
+                  if(s.getStudentSsn() == ssn) {
+                      student = s;
+                  }
+              }
+              if(student != null) {
+                  // Register for course
+                  boolean enrollmentStatus = courseList.unregisterForCourse(courseId, student);
+                  if(enrollmentStatus == false) {
+                      System.out.println("Course unregistration failed");
+                  } else {
+                      System.out.println("Unregistered for course");
+                      // TODO: add course list to Student
+                      //student.removeCourse(id);
+                  }
+              } else {
+                  // Failed to find student in studentList
+                  System.out.println("Could not find student enrolled.");
+              }
           } else {
               //Return invalid input message and try again.
           }
@@ -156,5 +216,8 @@ public class RegistrationSystem {
         return courseCurrentSize;
     }
 
+    RegistrationSystem() {
+        courseList = new CourseList();
+    }
 
 } //end of Class

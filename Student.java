@@ -47,5 +47,13 @@ public class Student implements Serializable {
   public String toString() {
     return firstName + " " + lastName + ", " + studentSsn;
   }
+  public boolean equals(Student s) {
+    if(s.studentSsn == studentSsn && s.getLastName().equals(getLastName())
+           && s.getFirstName().equals(getFirstName())) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 } //end of Class
