@@ -17,7 +17,8 @@ public class RegistrationSystem {
     ArrayList<Student> studentList;
     private int courseMaxSize = 10;
     private int courseCurrentSize = 0;
-
+    CourseList catalog = new CourseList();  //Wesley added
+	CourseList studentCourses = new CourseList();
     public static void main(String[] args) {
         RegistrationSystem builder = new RegistrationSystem();
         builder.go();
@@ -132,15 +133,39 @@ public class RegistrationSystem {
           userInputScanner = new Scanner(System.in);
           System.out.println("Please choose from the following options");
           System.out.println("To view available courses, press 1.");
-          System.out.println("To view registered courses, press 2.");
+          System.out.println("To input the course you want to join, press 2.");
+          System.out.println("To view registered courses, press 3.");
+          System.out.println("To un-registered from a course, press 4.");
           String courseOption = userInputScanner.next();
           int number = Integer.parseInt(courseOption);
 
           if (number == 1) {
               //Show available courses + option to register for course.
           } else if (number == 2) {
-              //Show registered courses + option to un-register from course.
-          } else {
+              //Option 2.
+          } else if (number == 3) {
+              //Show registered courses then return to options.
+              catalog.getList();
+			courseRegistration();
+          }
+          else if (number == 4) {
+              //Unregister
+              catalog.getList();
+              System.out.println("Which course would you like to unregister from. Type ID.");
+              userInputScanner2 = new Scanner(System.in);
+              String courseDrop = userInputScanner2.next();
+          	  int courseID = Integer.parseInt(courseDrop);
+
+          	  	  for(Course a: studentCourses) {
+					if(courseDrop == a.getCourseId()) {
+						a.unregister();
+						studentCourses.removeCourse(a);
+						break;
+					 }
+			      	}
+			      	courseRegistration();
+          }
+          else {
               //Return invalid input message and try again.
           }
 
