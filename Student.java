@@ -18,5 +18,9 @@ public class Student extends Person implements Serializable {
       return studentId;
   }
 
+    public String getStudentSsn() {
+        return super.getSsn();
+  }
 
-} //end of Class
+
+}
