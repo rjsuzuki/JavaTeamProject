@@ -14,6 +14,7 @@ public class RegistrationSystem implements Serializable {
     private int maximumStudentCapacity = 30;
     private int courseMaxSize = 10;
     private int courseCurrentSize = 0;
+    private CourseList courseList;  //may or may not be right
 
     public static void main(String[] args) {
 
@@ -103,13 +104,11 @@ public class RegistrationSystem implements Serializable {
 
     //*********************************To sign in a registered User*********************************
     /*public void userLogin() {
-
       try {
           userInputScanner = new Scanner(System.in);
           //Prompt User for login name
           System.out.println("Please enter your student ID: ");
           String login = userInputScanner.next();
-
           //open file and retrieve user info from database
           try {
               FileInputStream fileIn = new FileInputStream("studentRegistryList.ser");
@@ -117,13 +116,11 @@ public class RegistrationSystem implements Serializable {
               deserializedStudentList = (ArrayList)in.readObject();
               in.close();
               fileIn.close();
-
           } catch (IOException i) {
               i.printStackTrace();
           } catch (ClassNotFoundException e) {
               e.printStackTrace();
           }
-
           //Loop through array and find matching ID, if false,
           for (Student student : deserializedStudentList) {
               if (student.getStudentId().equals(login)) {
@@ -138,7 +135,6 @@ public class RegistrationSystem implements Serializable {
       } catch (Exception e) {
             e.printStackTrace();
       }
-
     }*/
 
     //*********************************Course registration option*********************************
@@ -166,7 +162,7 @@ public class RegistrationSystem implements Serializable {
                   int courseId = Integer.parseInt(userInputScanner.next());
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
-                  int ssn = Integer.parseInt(courseOption);
+                  String ssn = userInputScanner.next();
                   // Get student
                   Student student = null;
                   for(Student s: studentList) {
@@ -193,7 +189,7 @@ public class RegistrationSystem implements Serializable {
                   int courseId = Integer.parseInt(userInputScanner.next());
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
-                  int ssn = Integer.parseInt(courseOption);
+                  String ssn = userInputScanner.next();
                   // Get student from social security number
                   Student student = null;
                   for(Student s: studentList) {
@@ -230,9 +226,9 @@ public class RegistrationSystem implements Serializable {
         public int getCourseSize() {
             return courseCurrentSize;
         }
-
-        RegistrationSystem() {
+ /*     public  RegistrationSystem() {
             courseList = new CourseList();
-        }
+        }  */
+
 
 } //end of Class
