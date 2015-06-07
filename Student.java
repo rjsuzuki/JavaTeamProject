@@ -19,5 +19,4 @@ public class Student extends Person implements Serializable {
   }
 
 
-
 } //end of Class

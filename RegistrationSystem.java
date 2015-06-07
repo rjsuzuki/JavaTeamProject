@@ -166,11 +166,11 @@ public class RegistrationSystem implements Serializable {
                   int courseId = Integer.parseInt(userInputScanner.next());
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
-                  String ssn = userInputScanner.next();
+                  int ssn = Integer.parseInt(courseOption);
                   // Get student
                   Student student = null;
                   for(Student s: studentList) {
-                      if(s.getSsn().equals(ssn)) {
+                      if(s.getStudentSsn() == ssn) {
                           student = s;
                       }
                   }
@@ -193,11 +193,11 @@ public class RegistrationSystem implements Serializable {
                   int courseId = Integer.parseInt(userInputScanner.next());
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
-                  String ssn = userInputScanner.next();
+                  int ssn = Integer.parseInt(courseOption);
                   // Get student from social security number
                   Student student = null;
                   for(Student s: studentList) {
-                      if(s.getSsn().equals(ssn)) {
+                      if(s.getStudentSsn() == ssn) {
                           student = s;
                       }
                   }
