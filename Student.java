@@ -1,51 +1,22 @@
 import java.util.*;
 import java.io.*;
 
-public class Student implements Serializable {
+public class Student extends Person implements Serializable {
 
-  private String firstName;
-  private String lastName;
-  private String userLogin;
-  private int studentSsn;
+  private String studentId;
 
-
-  //Constructor
-  Student(String a, String b, int c) {
-    a = firstName;
-    b = lastName;
-    c = studentSsn;
+  public Student(String firstName, String lastName, int age, char gender, String ssn, String studentId) {
+      super(firstName, lastName, age, gender, ssn);
+      this.studentId = studentId;
   }
 
-  public String getFullName() {
-    return firstName + " " + lastName;
+  public void setStudentId(String studentId) {
+    this.studentId = studentId;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public String getStudentId() {
+      return studentId;
   }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public int getStudentSsn() {
-    return studentSsn;
-  }
-
-  public void setStudentSsn(int ssn) {
-    studentSsn = ssn;
-  }
-
-  public String toString() {
-    return firstName + " " + lastName + ", " + studentSsn;
-  }
 
 } //end of Class
