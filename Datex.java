@@ -1,15 +1,15 @@
-public class Date {
+public class Datex {
 	private int month;
 	private int day;
 	private int year;
 	// Constructor
-	public Date() {
+	public Datex() {
 		month = 0;
 		day = 0;
 		year = 0;
 	}
 	// Constructor
-	public Date(int month, int day, int year) {
+	public Datex(int month, int day, int year) {
 		this.month = month;
 		this.day = day;
 		this.year = year;
