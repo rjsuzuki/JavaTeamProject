@@ -145,17 +145,22 @@ public class RegistrationSystem implements Serializable {
               System.out.println("To view registered courses, press 3.");
               System.out.println("To register for course, press 4.");
               System.out.println("To unregister for course, press 5.");
+              System.out.println("To save changes, press 6.");
+              System.out.println("To save and exit, press 7.");
               int number = userInputScanner.nextInt();
 
 
               if (number == 1) {
                   courseList.viewAvailableCourseList(); // displays courses w/ seats available
+              	  courseRegistration();
               } else if (number == 2) {
                   //show all courses.
                   courseList.viewCourseList();
+                  courseRegistration();
               } else if (number == 3) {
                   //Show registered courses + option to un-register from course.
                   //
+                  courseRegistration();
               } else if (number == 4) {
                   System.out.println("Enter course id");
                   int courseId = userInputScanner.nextInt();
@@ -181,9 +186,26 @@ public class RegistrationSystem implements Serializable {
                       }
                   } else {
                       // Failed to find student in studentList
-                      System.out.println("Could not find student enrolled.");
+                      System.out.println("Could not find student enrolled. Try again or quit and register.");
+                      courseRegistration();
                   }
-              } else if (number == 5) {
+              }
+              else if (number == 6 || number ==7) {
+				            FileOutputStream fileOut = new FileOutputStream("studentRegistryList.ser"); // creates a serial file in ouput stream
+				            ObjectOutputStream out = new ObjectOutputStream(fileOut); // routes an object into the output stream
+				              out.writeObject(studentList); // write specified object(s) into file
+				            out.close();
+				            fileOut.close();
+
+				            //use equals() to compare strings
+          		System.out.println("Information saved to the database.");
+          		if (number==6) {
+				  courseRegistration();
+					}
+			  }
+
+
+              else if (number == 5) {
                   System.out.println("Enter course id");
                   int courseId = userInputScanner.nextInt();
                   // NOTE: should be ssn or student id
@@ -206,7 +228,12 @@ public class RegistrationSystem implements Serializable {
                           // Remove course to student's courseList
                           student.unregisterForCourse(courseList.getCourse(courseId));
                       }
-                  } else {
+                  }
+
+
+
+
+                  else {
                       // Failed to find student in studentList
                       System.out.println("Could not find student enrolled. Please try again.");
                       courseRegistration();
