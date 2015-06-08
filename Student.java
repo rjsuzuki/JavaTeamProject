@@ -27,6 +27,9 @@ public class Student extends Person implements Serializable {
 
   public void registerForCourse(Course course) {
 	  courseList.add(course);
+	  if(courseList.size() > 1) {
+		  Collections.sort(courseList);
+	  }
   }
   
   public void unregisterForCourse(Course course) {
@@ -34,9 +37,9 @@ public class Student extends Person implements Serializable {
   }
   
   public void viewCourseList() {
-		//Iterate over courseList, view each course info
-		for(Course c: courseList) {
-			c.viewCourseInfo();
-		}
+      //Iterate over courseList, view each course info
+      for(Course c: courseList) {
+          c.viewCourseInfo();
+      }
   }
 } //end of Class

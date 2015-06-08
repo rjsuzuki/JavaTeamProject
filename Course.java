@@ -6,13 +6,14 @@ import java.util.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 
-public class Course implements Comparable<Course> {
+public class Course implements Serializable, Comparable<Course>  {
 	private int id;    // unique course identification number
 	private String courseName;
 	private String summary;
-	private  Datex startDate;
-	private  Datex endDate;
+	private GregorianCalendar startDate;
+	private GregorianCalendar endDate;
 	private ArrayList<Student> studentList;
 	private int studentLimit;
 
@@ -23,6 +24,8 @@ public class Course implements Comparable<Course> {
 		summary = null;
 		studentLimit = 0;
 		studentList = new ArrayList<Student>();
+		startDate = new GregorianCalendar();
+		endDate = new GregorianCalendar();
 	}
 	// Constructor
 	public Course(int id, String courseName, String summary, int studentLimit,
@@ -30,10 +33,10 @@ public class Course implements Comparable<Course> {
 		this.id = id;
 		this.courseName = courseName;
 		this.summary = summary;
-		this.studentLimit = studentLimit;		
-		this.startDate = new Datex(startMonth, startDay, startYear);
-		this.endDate = new Datex(endMonth, endDay, endYear);
-			
+		this.studentLimit = studentLimit;
+		startDate = new GregorianCalendar(startYear, startMonth, startDay);
+		endDate = new GregorianCalendar(endYear, endMonth, endDay);
+
 		studentList = new ArrayList<Student>();
 	}
 
@@ -45,7 +48,7 @@ public class Course implements Comparable<Course> {
 			return false;
 		}
 	}
-	
+
 	public void setCourseId(int id) {
 		this.id = id;
 	}
@@ -58,7 +61,7 @@ public class Course implements Comparable<Course> {
 		this.summary = summary;
 	}
 
-	public void setDate( Datex startDate,  Datex endDate) {
+	public void setDate( GregorianCalendar startDate,  GregorianCalendar endDate) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
@@ -66,11 +69,11 @@ public class Course implements Comparable<Course> {
 	public void setStudentLimit(int limit) {
 		studentLimit = limit;
 	}
-	
+
 	public ArrayList<Student> getStudentList() {
 		return studentList;
 	}
-	
+
 	public int getCourseId() {
 		return id;
 	}
@@ -83,18 +86,18 @@ public class Course implements Comparable<Course> {
 		return summary;
 	}
 
-	public  Datex getStartDate() {
+	public  GregorianCalendar getStartDate() {
 		return startDate;
 	}
 
-	public  Datex getEndDate() {
+	public  GregorianCalendar getEndDate() {
 		return endDate;
 	}
 
 	public int getAvailableSeats() {
 		return studentLimit - studentList.size();
     }
-	
+
 	public boolean isSeatAvailable() {
 	        if(studentList.size() >= studentLimit) {
 	            return false;
@@ -106,7 +109,6 @@ public class Course implements Comparable<Course> {
 	public boolean register(Student student) {
 		if(studentList.size() + 1 <= studentLimit) {
 			studentList.add(student);
-//			student.addCourse(id);    // add course id to student's course list
 			return true;
 		} else {
 			// course full;
@@ -126,7 +128,7 @@ public class Course implements Comparable<Course> {
 		}
 
 	}
-	
+
 	// Check student enrolled
 	public boolean isStudent(Student student) {
 		for(Student s: studentList) {
@@ -136,13 +138,17 @@ public class Course implements Comparable<Course> {
 		}
 		return false;
 	}
-	
+
 	// Output course information to console
 	// Alphabetical list of course identification number, course dates, name, brief summary,
-	// the enrollment limit, and the number of students already enrolled. 
+	// the enrollment limit, and the number of students already enrolled.
 	public void viewCourseInfo() {
 		System.out.println("Course ID: " + id);
-		System.out.println("Course Dates: " + startDate.getDate() + " to " + endDate.getDate());
+		System.out.println("Course Dates: " + 
+				startDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+				+ " " + startDate.get(Calendar.DATE) + ", " + startDate.get(Calendar.YEAR) + " to "
+				+ endDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+				+ " "  + endDate.get(Calendar.DATE) + ", " + endDate.get(Calendar.YEAR));
 		System.out.println("Course Name: " + courseName);
 		System.out.println("Course Summary: " + summary);
 		System.out.println("Enrollment Limit " + studentLimit + "    Enrolled Students " + studentList.size());
