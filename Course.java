@@ -60,6 +60,11 @@ public class Course {
 	public void setStudentLimit(int limit) {
 		studentLimit = limit;
 	}
+
+	public ArrayList<Student> getStudentList() {
+			return studentList;
+	}
+
 	public int getCourseId() {
 		return id;
 	}

@@ -5,6 +5,7 @@ public class Student extends Person implements Serializable {
 
   private String studentId;
 
+  //Constructor
   public Student(String firstName, String lastName, int age, char gender, String ssn, String studentId) {
       super(firstName, lastName, age, gender, ssn);
       this.studentId = studentId;
@@ -18,11 +19,9 @@ public class Student extends Person implements Serializable {
       return studentId;
   }
 
-    public String getStudentSsn() {
-        return super.getSsn();
+  public String getStudentSsn() {
+      return super.getSsn();
   }
-
-
 
 
 } //end of Class

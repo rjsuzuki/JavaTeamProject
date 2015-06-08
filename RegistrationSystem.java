@@ -5,19 +5,22 @@ import java.util.*;
 
 public class RegistrationSystem implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     //For User Input
     private File studentRegistryList;
     private Scanner fileScanner;
     private Scanner userInputScanner;
-    ArrayList<Student> studentList = new ArrayList<Student>();
+
 
     private int maximumStudentCapacity = 30;
     private int courseMaxSize = 10;
     private int courseCurrentSize = 0;
     private CourseList courseList;  //may or may not be right
+    private ArrayList<Student> studentList;
+
 
     public static void main(String[] args) {
-
 
         RegistrationSystem builder = new RegistrationSystem();
         builder.go();
@@ -30,12 +33,9 @@ public class RegistrationSystem implements Serializable {
         try {
           //Set up Scanner object using system.in
           userInputScanner = new Scanner(System.in);
-
-
           System.out.println("Welcome to the University of Irvine Online Registration System!");
-          System.out.println("To create a new user press 1. To login press 2.");
-          String menuOption = userInputScanner.next();
-          int number = Integer.parseInt(menuOption); //Converts user input to an integer
+          System.out.println("To create a new user press 1. To begin course registration press 2.");
+          int number = userInputScanner.nextInt();
           if (number == 1) {
             userRegistration();
           } else if (number == 2) {
@@ -86,15 +86,12 @@ public class RegistrationSystem implements Serializable {
           out.close();
           fileOut.close();
 
-
-          //validate if ssn = unique?
-
           //use equals() to compare strings
           System.out.println("Thank you " + userFirstName + " " + userLastName);
           System.out.println("You have now been added to the database.");
 
           //Return screen to login page
-          go();
+          courseRegistration();
 
           userInputScanner.close();
         } catch (Exception e) {
@@ -142,24 +139,26 @@ public class RegistrationSystem implements Serializable {
 
             try {
               userInputScanner = new Scanner(System.in);
-              System.out.println("Please choose from the following options");
+              System.out.println("Please choose from the following options.");
               System.out.println("To view available courses, press 1.");
-              System.out.println("To view registered courses, press 2.");
-              System.out.println("To register for course, press 3.");
-              System.out.println("To unregister for course, press 4.");
-              String courseOption = userInputScanner.next();
-              int number = Integer.parseInt(courseOption);
+              System.out.println("To view all courses, press 2.");
+              System.out.println("To view registered courses, press 3.");
+              System.out.println("To register for course, press 4.");
+              System.out.println("To unregister for course, press 5.");
+              int number = userInputScanner.nextInt();
+
 
               if (number == 1) {
-                  //Show available courses + option to register for course.
-                  // NOTE: which method is wanted here?
-                  //courseList.viewCourseList();  // displays all courses
                   courseList.viewAvailableCourseList(); // displays courses w/ seats available
               } else if (number == 2) {
-                  //Show registered courses + option to un-register from course.
+                  //show all courses.
+                  courseList.viewCourseList();
               } else if (number == 3) {
+                  //Show registered courses + option to un-register from course.
+                  //
+              } else if (number == 4) {
                   System.out.println("Enter course id");
-                  int courseId = Integer.parseInt(userInputScanner.next());
+                  int courseId = userInputScanner.nextInt();
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
                   String ssn = userInputScanner.next();
@@ -184,9 +183,9 @@ public class RegistrationSystem implements Serializable {
                       // Failed to find student in studentList
                       System.out.println("Could not find student enrolled.");
                   }
-              } else if (number == 4) {
+              } else if (number == 5) {
                   System.out.println("Enter course id");
-                  int courseId = Integer.parseInt(userInputScanner.next());
+                  int courseId = userInputScanner.nextInt();
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
                   String ssn = userInputScanner.next();
@@ -209,10 +208,13 @@ public class RegistrationSystem implements Serializable {
                       }
                   } else {
                       // Failed to find student in studentList
-                      System.out.println("Could not find student enrolled.");
+                      System.out.println("Could not find student enrolled. Please try again.");
+                      courseRegistration();
                   }
               } else {
                   //Return invalid input message and try again.
+                  System.out.println("Invalid input. Please try again.");
+                  courseRegistration();
               }
 
               userInputScanner.close();
@@ -226,9 +228,11 @@ public class RegistrationSystem implements Serializable {
         public int getCourseSize() {
             return courseCurrentSize;
         }
- /*     public  RegistrationSystem() {
+
+        public RegistrationSystem() {
             courseList = new CourseList();
-        }  */
+            studentList = new ArrayList<Student>();
+        }
 
 
 } //end of Class

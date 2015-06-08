@@ -22,8 +22,10 @@ public class CourseList {
 	// View of each course information
 	public void viewCourseList()
 	{
+
 		// Sort the peopleList ArrayList by last name in alphabetical order
 		Collections.sort(courseList, Course.CourseNameComparator);
+
 
 		//Iterate over courseList, view each course info
 		for(Course c: courseList) {
@@ -76,25 +78,19 @@ public class CourseList {
 			Course course;
 
 			int i=0;
-			while(fileScanner.hasNext()) {
-				// Create Course instance w/ info from input file
-				course = new Course();
-				course.setCourseId(Integer.parseInt(fileScanner.next())); // Course Id
-				course.setCourseName(fileScanner.next()); // Name
-				course.setSummary(fileScanner.next());
-				course.setStudentLimit(Integer.parseInt(fileScanner.next()));
-				int month = Integer.parseInt(fileScanner.next());
-				int day = Integer.parseInt(fileScanner.next());
-				int year = Integer.parseInt(fileScanner.next());
 
-				month = Integer.parseInt(fileScanner.next());
-				day = Integer.parseInt(fileScanner.next());
-				year = Integer.parseInt(fileScanner.next());
-				Datex startDate = new Datex(month, day, year);
-				Datex endDate = new Datex(month, day, year);
-				course.setDate(startDate, endDate);
-				courseList.add(course);
-			}
+			while (fileScanner.hasNextLine()) {
+						String[] courseAttributes = fileScanner.nextLine().split(",");
+
+						Datex tempStartDate = new Datex(new Integer(courseAttributes[4]).intValue(),new Integer(courseAttributes[5]).intValue(),new Integer(courseAttributes[6]).intValue());
+						Datex tempEndDate = new Datex(new Integer(courseAttributes[7]).intValue(), new Integer(courseAttributes[8]).intValue(), new Integer(courseAttributes[9]).intValue());
+						Course tempCourse = new Course(new Integer(courseAttributes[0]).intValue(), tempStartDate, tempEndDate, courseAttributes[1],
+																								courseAttributes[2], new Integer(courseAttributes[3]).intValue());
+
+						courseList.add(tempCourse);
+						}
+
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

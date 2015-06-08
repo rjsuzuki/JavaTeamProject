@@ -1,7 +1,7 @@
-1,Ancient Studies,Subject focuses on ancient magic; such as the ancient Egyptians' spells.,1,7,1,,2015,9,1,2015
+1,Ancient Studies,Subject focuses on ancient magic; such as the ancient Egyptians' spells.,1,7,1,2015,9,1,2015
 2,Ancient Runes,Theoretical subject that studies the ancient runoc scripts of magic.,2,7,1,2015,9,1,2015
 3,Transfiguration,Teaches the art of changing the form and appearance of an object.,3,7,1,2015,9,1,2015
-4,Potions,Students learn the correct way to brew potions, following specific recipes and using various magical ingredients to create the potions,4,7,1,2015,9,1,2015
+4,Potions,Students learn the correct way to brew potions; following specific recipes and using various magical ingredients to create the potions.,4,7,1,2015,9,1,2015
 5,Charms,Specialises in the teaching of charms.,5,7,1,2015,9,1,2015
-6,Divination,Teaches methods of divining the future, or gathering insights into future events, through various rituals and tools.,6,7,1,2015,9,1,2015
-7,History of Magic,Teaches study of magical history.7,7,1,2015,9,1,2015
+6,Divination,Teaches methods of divining the future or gathering insights into future events; through various rituals and tools.,6,7,1,2015,9,1,2015
+7,History of Magic,Teaches study of magical history.,7,7,1,2015,9,1,2015
