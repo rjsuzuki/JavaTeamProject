@@ -230,7 +230,10 @@ public class RegistrationSystem implements Serializable {
         }
 
         public RegistrationSystem() {
+        	System.out.println("RegistrationSystem");
             courseList = new CourseList();
+            // TODO: remove the following call, temporary for testing
+            //courseList.viewCourseList();
             studentList = new ArrayList<Student>();
         }
 

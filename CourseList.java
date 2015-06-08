@@ -19,25 +19,22 @@ public class CourseList {
 	public void addCourse(Course course) {
 		courseList.add(course);
 	}
+	public void removeCourse(Course course) {
+		courseList.remove(course);
+	}
+
 	// View of each course information
 	public void viewCourseList()
 	{
-
-		// Sort the peopleList ArrayList by last name in alphabetical order
-		Collections.sort(courseList, Course.CourseNameComparator);
-
-
 		//Iterate over courseList, view each course info
 		for(Course c: courseList) {
 			c.viewCourseInfo();
 		}
 	}
+
 	// View of each course information w/ seats available
 	public void viewAvailableCourseList()
 	{
-		// Sort the peopleList ArrayList by last name in alphabetical order
-		Collections.sort(courseList, Course.CourseNameComparator);
-
 		//Iterate over courseList, view each course info
 		for(Course c: courseList) {
 			if(c.isSeatAvailable()) {
@@ -45,6 +42,7 @@ public class CourseList {
 			}
 		}
 	}
+
 	public Course getCourse(int id) {
 		for(Course c: courseList) {
 			if(c.getCourseId() == id) {
@@ -53,44 +51,38 @@ public class CourseList {
 		}
 		return null;
 	}
+
 	public boolean registerForCourse(int id, Student student) {
 		Course course = getCourse(id);
 		return course.register(student);
 	}
+
 	public boolean unregisterForCourse(int id, Student student) {
 		Course course = getCourse(id);
 		return course.unregister(student);
 	}
+
 	public void getCourseList() {
-    	File courseListFile;
+    		File courseListFile;
 		Scanner fileScanner;
  		courseList = new ArrayList<Course>();
 		try
 		{
 			// Open file CourseList.txt file
 			courseListFile = new File("courseList.txt");
-
 			fileScanner = new Scanner(courseListFile);
-			// Set delimeter ',' and newline
-			fileScanner.useDelimiter("[,\\n]");
-
-			String string;
 			Course course;
 
-			int i=0;
-
-			while (fileScanner.hasNextLine()) {
-						String[] courseAttributes = fileScanner.nextLine().split(",");
-
-						Datex tempStartDate = new Datex(new Integer(courseAttributes[4]).intValue(),new Integer(courseAttributes[5]).intValue(),new Integer(courseAttributes[6]).intValue());
-						Datex tempEndDate = new Datex(new Integer(courseAttributes[7]).intValue(), new Integer(courseAttributes[8]).intValue(), new Integer(courseAttributes[9]).intValue());
-						Course tempCourse = new Course(new Integer(courseAttributes[0]).intValue(), tempStartDate, tempEndDate, courseAttributes[1],
-																								courseAttributes[2], new Integer(courseAttributes[3]).intValue());
-
-						courseList.add(tempCourse);
-						}
-
-
+			while(fileScanner.hasNextLine()) {
+				String[] courseAttributes = fileScanner.nextLine().split(",");
+				course = new Course(new Integer(courseAttributes[0]).intValue(), courseAttributes[1], courseAttributes[2], new Integer(courseAttributes[3]).intValue(),
+								new Integer(courseAttributes[4]).intValue(), new Integer(courseAttributes[5]).intValue(), new Integer(courseAttributes[6]).intValue(),
+								new Integer(courseAttributes[7]).intValue(), new Integer(courseAttributes[8]).intValue(), new Integer(courseAttributes[9]).intValue());
+				courseList.add(course);
+			}
+			fileScanner.close();
+			
+			Collections.sort(courseList);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Course {
+public class Course implements Comparable<Course> {
 	private int id;    // unique course identification number
 	private String courseName;
 	private String summary;
@@ -25,13 +25,15 @@ public class Course {
 		studentList = new ArrayList<Student>();
 	}
 	// Constructor
-	public Course(int id,  Datex startDate,  Datex endDate, String courseName, String summary, int studentLimit) {
+	public Course(int id, String courseName, String summary, int studentLimit,
+				int startMonth, int startDay, int startYear, int endMonth, int endDay, int endYear) {
 		this.id = id;
 		this.courseName = courseName;
 		this.summary = summary;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.studentLimit = studentLimit;
+		this.studentLimit = studentLimit;		
+		this.startDate = new Datex(startMonth, startDay, startYear);
+		this.endDate = new Datex(endMonth, endDay, endYear);
+			
 		studentList = new ArrayList<Student>();
 	}
 
@@ -43,12 +45,15 @@ public class Course {
 			return false;
 		}
 	}
+	
 	public void setCourseId(int id) {
 		this.id = id;
 	}
+
 	public void setCourseName(String name) {
 		courseName = name;
 	}
+
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
@@ -57,20 +62,23 @@ public class Course {
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
+
 	public void setStudentLimit(int limit) {
 		studentLimit = limit;
 	}
-
+	
 	public ArrayList<Student> getStudentList() {
-			return studentList;
+		return studentList;
 	}
-
+	
 	public int getCourseId() {
 		return id;
 	}
+
 	public String getCourseName() {
 		return courseName;
 	}
+
 	public String getSummary() {
 		return summary;
 	}
@@ -78,12 +86,15 @@ public class Course {
 	public  Datex getStartDate() {
 		return startDate;
 	}
+
 	public  Datex getEndDate() {
 		return endDate;
 	}
+
 	public int getAvailableSeats() {
 		return studentLimit - studentList.size();
     }
+	
 	public boolean isSeatAvailable() {
 	        if(studentList.size() >= studentLimit) {
 	            return false;
@@ -91,8 +102,6 @@ public class Course {
 	            return true;
 	        }
     }
-
-
 
 	public boolean register(Student student) {
 		if(studentList.size() + 1 <= studentLimit) {
@@ -110,7 +119,6 @@ public class Course {
 		// Check student enrolled in course
 		if(studentList.size() > 0 && isStudent(student)) {
 			studentList.remove(student);
-//			student.removeCourse(id);
 			return true;
 		} else {
 			// Not student enrolled in the course
@@ -118,6 +126,7 @@ public class Course {
 		}
 
 	}
+	
 	// Check student enrolled
 	public boolean isStudent(Student student) {
 		for(Student s: studentList) {
@@ -127,9 +136,10 @@ public class Course {
 		}
 		return false;
 	}
+	
 	// Output course information to console
 	// Alphabetical list of course identification number, course dates, name, brief summary,
-	// the enrollment limit, and the number of students already enrolled.
+	// the enrollment limit, and the number of students already enrolled. 
 	public void viewCourseInfo() {
 		System.out.println("Course ID: " + id);
 		System.out.println("Course Dates: " + startDate.getDate() + " to " + endDate.getDate());
@@ -138,15 +148,7 @@ public class Course {
 		System.out.println("Enrollment Limit " + studentLimit + "    Enrolled Students " + studentList.size());
 	}
 
-
-
-	// Custom Comparator for sorting the list by courseName in ascending alphabetical order
-    public static Comparator<Course> CourseNameComparator = new Comparator<Course>() {
-
-	public int compare(Course c1, Course c2) {
-	   String courseName1 = c1.getCourseName().toUpperCase();
-	   String courseName2 = c2.getCourseName().toUpperCase();
-
-	   return courseName1.compareTo(courseName2);
-	}};
+	public int compareTo(Course course) {
+		return this.courseName.compareTo(course.getCourseName());
+	}
 }
