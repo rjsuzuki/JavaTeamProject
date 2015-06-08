@@ -1,4 +1,6 @@
-public class Datex {
+import java.io.*;
+
+public class Datex implements Serializable {
 	private int month;
 	private int day;
 	private int year;
