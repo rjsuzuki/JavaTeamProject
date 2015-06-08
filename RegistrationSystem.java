@@ -29,6 +29,7 @@ public class RegistrationSystem implements Serializable {
 
     public void go() {
 
+
         //Student Registration Begins here
         try {
           //Set up Scanner object using system.in
@@ -37,8 +38,31 @@ public class RegistrationSystem implements Serializable {
           System.out.println("To create a new user press 1. To begin course registration press 2.");
           int number = userInputScanner.nextInt();
           if (number == 1) {
+
             userRegistration();
-          } else if (number == 2) {
+          }
+          else if (number == 2) {
+			  try
+							{
+							  System.out.println("Data Retreived!" );
+							  FileInputStream inputFileStream = new FileInputStream("studentRegistryList.ser");
+							  ObjectInputStream objectInputStream = new ObjectInputStream(inputFileStream);
+							  studentList = (ArrayList<Student>) objectInputStream.readObject();
+							  objectInputStream.close();
+							  inputFileStream.close();
+										  System.out.println(studentList.size() );
+
+							}
+							catch(ClassNotFoundException e)
+							{
+							  e.printStackTrace();
+							}
+							catch(IOException i)
+							{
+							  i.printStackTrace();
+				}
+
+
             courseRegistration();
           } else {
             System.out.println("Invalid input. Please choose again.");
@@ -49,6 +73,9 @@ public class RegistrationSystem implements Serializable {
         } catch (Exception e) {
           e.printStackTrace();
         }
+
+
+
     } //end of go()
 
     //*********************************To create a new User*************************************************
@@ -158,6 +185,7 @@ public class RegistrationSystem implements Serializable {
                   courseList.viewCourseList();
                   courseRegistration();
               } else if (number == 3) {
+
                   //Show registered courses + option to un-register from course.
                   //
                   courseRegistration();
@@ -183,6 +211,7 @@ public class RegistrationSystem implements Serializable {
                           System.out.println("Registered for course");
                           // Add course to student's courseList
                           student.registerForCourse(courseList.getCourse(courseId));
+                          courseRegistration();
                       }
                   } else {
                       // Failed to find student in studentList
