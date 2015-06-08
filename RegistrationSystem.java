@@ -176,8 +176,8 @@ public class RegistrationSystem implements Serializable {
                           System.out.println("Student course registration failed");
                       } else {
                           System.out.println("Registered for course");
-                          // TODO: add course list to Student
-                          //student.addCourse(id);
+                          // Add course to student's courseList
+                          student.registerForCourse(courseList.getCourse(courseId));
                       }
                   } else {
                       // Failed to find student in studentList
@@ -203,8 +203,8 @@ public class RegistrationSystem implements Serializable {
                           System.out.println("Course unregistration failed");
                       } else {
                           System.out.println("Unregistered for course");
-                          // TODO: add course list to Student
-                          //student.removeCourse(id);
+                          // Remove course to student's courseList
+                          student.unregisterForCourse(courseList.getCourse(courseId));
                       }
                   } else {
                       // Failed to find student in studentList
