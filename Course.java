@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Course implements Comparable<Course> {
+public class Course implements Serializable, Comparable<Course>  {
 	private int id;    // unique course identification number
 	private String courseName;
 	private String summary;
@@ -30,10 +30,10 @@ public class Course implements Comparable<Course> {
 		this.id = id;
 		this.courseName = courseName;
 		this.summary = summary;
-		this.studentLimit = studentLimit;		
+		this.studentLimit = studentLimit;
 		this.startDate = new Datex(startMonth, startDay, startYear);
 		this.endDate = new Datex(endMonth, endDay, endYear);
-			
+
 		studentList = new ArrayList<Student>();
 	}
 
@@ -45,7 +45,7 @@ public class Course implements Comparable<Course> {
 			return false;
 		}
 	}
-	
+
 	public void setCourseId(int id) {
 		this.id = id;
 	}
@@ -66,11 +66,11 @@ public class Course implements Comparable<Course> {
 	public void setStudentLimit(int limit) {
 		studentLimit = limit;
 	}
-	
+
 	public ArrayList<Student> getStudentList() {
 		return studentList;
 	}
-	
+
 	public int getCourseId() {
 		return id;
 	}
@@ -94,7 +94,7 @@ public class Course implements Comparable<Course> {
 	public int getAvailableSeats() {
 		return studentLimit - studentList.size();
     }
-	
+
 	public boolean isSeatAvailable() {
 	        if(studentList.size() >= studentLimit) {
 	            return false;
@@ -126,7 +126,7 @@ public class Course implements Comparable<Course> {
 		}
 
 	}
-	
+
 	// Check student enrolled
 	public boolean isStudent(Student student) {
 		for(Student s: studentList) {
@@ -136,10 +136,10 @@ public class Course implements Comparable<Course> {
 		}
 		return false;
 	}
-	
+
 	// Output course information to console
 	// Alphabetical list of course identification number, course dates, name, brief summary,
-	// the enrollment limit, and the number of students already enrolled. 
+	// the enrollment limit, and the number of students already enrolled.
 	public void viewCourseInfo() {
 		System.out.println("Course ID: " + id);
 		System.out.println("Course Dates: " + startDate.getDate() + " to " + endDate.getDate());
