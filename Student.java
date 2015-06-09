@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 
+@SuppressWarnings("serial")
+
 public class Student extends Person implements Serializable {
 
   private String studentId;
@@ -39,7 +41,7 @@ public class Student extends Person implements Serializable {
   public void viewCourseList() {
       //Iterate over courseList, view each course info
       for(Course c: courseList) {
-          c.viewCourseInfo();
+          c.viewCourseHeader();
       }
   }
 } //end of Class

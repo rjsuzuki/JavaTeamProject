@@ -3,6 +3,8 @@ import java.text.SimpleDateFormat;
 import java.io.*;
 import java.util.*;
 
+@SuppressWarnings({"serial", "unchecked"})
+
 public class RegistrationSystem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -185,9 +187,22 @@ public class RegistrationSystem implements Serializable {
                   courseList.viewCourseList();
                   courseRegistration();
               } else if (number == 3) {
-
-                  //Show registered courses + option to un-register from course.
-                  //
+            	  // NOTE: should be ssn or student id
+                  System.out.println("Enter Social Security Number");
+                  String ssn = userInputScanner.next();
+                  // Get student
+                  Student student = null;
+                  for(Student s: studentList) {
+                      if(s.getStudentSsn().equals(ssn)) {
+                          student = s;
+                      }
+                  }
+                  if(student != null) {
+                	  student.viewCourseList();
+                  } else {
+                      // Failed to find student in studentList
+                      System.out.println("Could not find student enrolled. Try again or quit and register.");
+                  }
                   courseRegistration();
               } else if (number == 4) {
                   System.out.println("Enter course id");

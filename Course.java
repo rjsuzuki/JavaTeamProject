@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
 
+@SuppressWarnings("serial")
+
 public class Course implements Serializable, Comparable<Course>  {
 	private int id;    // unique course identification number
 	private String courseName;
@@ -140,7 +142,7 @@ public class Course implements Serializable, Comparable<Course>  {
 	}
 
 	// Output course information to console
-	// Alphabetical list of course identification number, course dates, name, brief summary,
+	// Course identification number, course dates, name, brief summary,
 	// the enrollment limit, and the number of students already enrolled.
 	public void viewCourseInfo() {
 		System.out.println("Course ID: " + id);
@@ -152,6 +154,17 @@ public class Course implements Serializable, Comparable<Course>  {
 		System.out.println("Course Name: " + courseName);
 		System.out.println("Course Summary: " + summary);
 		System.out.println("Enrollment Limit " + studentLimit + "    Enrolled Students " + studentList.size());
+	}
+	
+	// Output Course identification number, course dates, name
+	public void viewCourseHeader() {
+		System.out.println("Course ID: " + id);
+		System.out.println("Course Dates: " + 
+				startDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+				+ " " + startDate.get(Calendar.DATE) + ", " + startDate.get(Calendar.YEAR) + " to "
+				+ endDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+				+ " "  + endDate.get(Calendar.DATE) + ", " + endDate.get(Calendar.YEAR));
+		System.out.println("Course Name: " + courseName);
 	}
 
 	public int compareTo(Course course) {

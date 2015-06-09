@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Collections;
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
+
 public class Person implements Serializable, Comparable<Person> {
 
 
