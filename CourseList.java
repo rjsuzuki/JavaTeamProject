@@ -9,11 +9,13 @@ import java.util.Scanner;
 
 public class CourseList {
 	private ArrayList<Course> courseList;
+	private ArrayList<Course> alphabetizedCourseList;
 
 	// Constructor
 	public CourseList() {
 		courseList = new ArrayList<Course>();
 		getCourseList();
+		getCourseListAlphabetized();
 	}
 
 	public void addCourse(Course course) {
@@ -32,11 +34,27 @@ public class CourseList {
 		}
 	}
 
+	// View course list Alphabetically
+	public void viewCourseListAlphabetically() {
+		for(Course c: alphabetizedCourseList) {
+			c.viewCourseInfo();
+		}
+	}
+
 	// View of each course information w/ seats available
 	public void viewAvailableCourseList()
 	{
 		//Iterate over courseList, view each course info
 		for(Course c: courseList) {
+			if(c.isSeatAvailable()) {
+				c.viewCourseInfo();
+			}
+		}
+	}
+
+	public void viewAvailableCourseListAlphabetically()
+	{
+		for(Course c : alphabetizedCourseList) {
 			if(c.isSeatAvailable()) {
 				c.viewCourseInfo();
 			}
@@ -81,10 +99,37 @@ public class CourseList {
 				courseList.add(course);
 			}
 			fileScanner.close();
-			
-			Collections.sort(courseList);
+
+			System.out.println(courseList);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
     }
+
+		public void getCourseListAlphabetized() {
+					File courseListFile;
+			Scanner fileScanner;
+			alphabetizedCourseList = new ArrayList<Course>();
+			try
+			{
+				// Open file CourseList.txt file
+				courseListFile = new File("courseList.txt");
+				fileScanner = new Scanner(courseListFile);
+				Course course;
+
+				while(fileScanner.hasNextLine()) {
+					String[] courseAttributes = fileScanner.nextLine().split(",");
+					course = new Course(new Integer(courseAttributes[0]).intValue(), courseAttributes[1], courseAttributes[2], new Integer(courseAttributes[3]).intValue(),
+									new Integer(courseAttributes[4]).intValue(), new Integer(courseAttributes[5]).intValue(), new Integer(courseAttributes[6]).intValue(),
+									new Integer(courseAttributes[7]).intValue(), new Integer(courseAttributes[8]).intValue(), new Integer(courseAttributes[9]).intValue());
+					alphabetizedCourseList.add(course);
+				}
+				fileScanner.close();
+
+				Collections.sort(alphabetizedCourseList);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			}
+
 }
