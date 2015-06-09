@@ -36,35 +36,35 @@ public class RegistrationSystem implements Serializable {
         try {
           //Set up Scanner object using system.in
           userInputScanner = new Scanner(System.in);
+
+			File checkExistence = new File("studentRegistryList.ser");
+			if( checkExistence.exists()) {
+			  try
+					{
+					  FileInputStream inputFileStream = new FileInputStream("studentRegistryList.ser");
+					  ObjectInputStream objectInputStream = new ObjectInputStream(inputFileStream);
+					  studentList = (ArrayList<Student>) objectInputStream.readObject();
+					  objectInputStream.close();
+					  inputFileStream.close();
+
+					}
+					catch(ClassNotFoundException e)
+					{
+					  e.printStackTrace();
+					}
+					catch(IOException i)
+					{
+					  i.printStackTrace();
+					}
+			}
+
           System.out.println("Welcome to the University of Irvine Online Registration System!");
           System.out.println("To create a new user press 1. To begin course registration press 2.");
           int number = userInputScanner.nextInt();
           if (number == 1) {
-
             userRegistration();
           }
           else if (number == 2) {
-			  try
-							{
-							  System.out.println("Data Retreived!" );
-							  FileInputStream inputFileStream = new FileInputStream("studentRegistryList.ser");
-							  ObjectInputStream objectInputStream = new ObjectInputStream(inputFileStream);
-							  studentList = (ArrayList<Student>) objectInputStream.readObject();
-							  objectInputStream.close();
-							  inputFileStream.close();
-										  System.out.println(studentList.size() );
-
-							}
-							catch(ClassNotFoundException e)
-							{
-							  e.printStackTrace();
-							}
-							catch(IOException i)
-							{
-							  i.printStackTrace();
-				}
-
-
             courseRegistration();
           } else {
             System.out.println("Invalid input. Please choose again.");
