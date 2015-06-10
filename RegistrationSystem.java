@@ -94,18 +94,40 @@ public class RegistrationSystem implements Serializable {
         try {
           userInputScanner = new Scanner(System.in);
 
-
           System.out.println("Please enter your first name: ");
-          String userFirstName = userInputScanner.next();
+          String userFirstName = userInputScanner.next();         
+          while(userFirstName.matches(".*[^a-zA-Z].*")) {
+        	  System.out.println("*****Error, please do not use numbers or special characters.*****");
+              System.out.println("Please enter your first name: ");
+              userFirstName = userInputScanner.next();
+          }
 
           System.out.println("Please enter your last name: ");
           String userLastName = userInputScanner.next();
+          while(userLastName.matches(".*[^a-zA-Z].*")) {
+        	  System.out.println("*****Error, please do not use numbers or special characters.*****");
+              System.out.println("Please enter your last name: ");
+              userLastName = userInputScanner.next();
+          }
 
           System.out.println("Please enter your age: ");
-          int userAge = userInputScanner.nextInt();
+          String userAgeString = userInputScanner.next();
+          while(userAgeString.matches(".*[^0-9].*")) {
+              System.out.println("*******Error, this is not possible.*******");
+              System.out.println("Please enter your age: ");
+              userAgeString = userInputScanner.next();
+          }
+          int userAge = Integer.parseInt(userAgeString);
 
           System.out.println("Please enter your gender (M/F): ");
           char userGender = userInputScanner.next().charAt(0);
+          System.out.println("userGender " + userGender);
+          while(userGender != 'M' && userGender != 'F') {
+              System.out.println("*****Error, please enter M or F only*****");
+              System.out.println("Please enter your gender (M/F): ");
+              userGender = userInputScanner.next().charAt(0);
+              System.out.println("userGender " + userGender);
+          }
 
           System.out.println("Please enter your SSN: ");
           String userSsn = userInputScanner.next();
