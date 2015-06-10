@@ -151,6 +151,7 @@ public class RegistrationSystem implements Serializable {
           while(userSsn.length() != 9 || uniqueSsn == false) {
               System.out.println("*****Error, please enter a valid 9-digit SSN*****");
               System.out.println("Please enter your SSN: ");
+              uniqueSsn = true;
               userSsn = userInputScanner.next();
           }
           int checkSsn = Integer.parseInt(userSsn);
@@ -168,6 +169,7 @@ public class RegistrationSystem implements Serializable {
           while (studentId.length() != 5 || uniqueId == false) {
               System.out.println("*****Error, please enter a valid 5-digit ID*****");
               System.out.println("Please enter a 5-digit student ID number:");
+              uniqueId = true;
               studentId = userInputScanner.next();
           }
           int checkId = Integer.parseInt(studentId);
