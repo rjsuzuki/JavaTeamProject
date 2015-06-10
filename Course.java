@@ -109,7 +109,7 @@ public class Course implements Serializable, Comparable<Course>  {
     }
 
 	public boolean register(Student student) {
-		if(studentList.size() + 1 <= studentLimit) {
+		if(studentList.size() + 1 <= studentLimit && !(studentList.contains(student)))  {
 			studentList.add(student);
 			return true;
 		} else {
@@ -146,7 +146,7 @@ public class Course implements Serializable, Comparable<Course>  {
 	// the enrollment limit, and the number of students already enrolled.
 	public void viewCourseInfo() {
 		System.out.println("Course ID: " + id);
-		System.out.println("Course Dates: " + 
+		System.out.println("Course Dates: " +
 				startDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
 				+ " " + startDate.get(Calendar.DATE) + ", " + startDate.get(Calendar.YEAR) + " to "
 				+ endDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
@@ -155,11 +155,11 @@ public class Course implements Serializable, Comparable<Course>  {
 		System.out.println("Course Summary: " + summary);
 		System.out.println("Enrollment Limit " + studentLimit + "    Enrolled Students " + studentList.size());
 	}
-	
+
 	// Output Course identification number, course dates, name
 	public void viewCourseHeader() {
 		System.out.println("Course ID: " + id);
-		System.out.println("Course Dates: " + 
+		System.out.println("Course Dates: " +
 				startDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
 				+ " " + startDate.get(Calendar.DATE) + ", " + startDate.get(Calendar.YEAR) + " to "
 				+ endDate.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())

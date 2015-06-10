@@ -44,11 +44,11 @@ public class Student extends Person implements Serializable {
 		  Collections.sort(courseList);
 	  }
   }
-  
+
   public void unregisterForCourse(Course course) {
 	  courseList.remove(course);
   }
-  
+
   public void viewCourseList() {
       //Iterate over courseList, view each course info
       for(Course c: courseList) {
