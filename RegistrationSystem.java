@@ -131,7 +131,19 @@ public class RegistrationSystem implements Serializable {
 
           System.out.println("Please enter your SSN: ");
           String userSsn = userInputScanner.next();
-          int checkSsn = Integer.parseInt(userSsn);
+          while (!userSsn.matches("\\d{9}")) {
+              System.out.println("*****Error, valid social security numbers are 9-digits in length.*****");
+              System.out.println("Please enter your SSN: ");
+              userSsn = userInputScanner.next();
+          }
+          
+          // Check if another student has same social security number
+          /* TODO: what should do if another student has same ssn
+          for(Student s: studentList) {
+        	  if(s.getSsn().equals(userSsn)) {
+        		  System.out.println("*****Error, Student with same social security number exists.*****");
+        	  }
+          }*/
 
           System.out.println("Please enter a 5-digit student ID number:");
           String studentId = userInputScanner.next();
