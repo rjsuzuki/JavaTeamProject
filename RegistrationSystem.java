@@ -66,6 +66,8 @@ public class RegistrationSystem implements Serializable {
           System.out.println("To begin course registration, press 2.");
           System.out.println("To view student directory, press 3.");
           System.out.println("To exit the program, press 4.");
+
+
           int number = userInputScanner.nextInt();
           if (number == 1) {
             userRegistration();
@@ -281,8 +283,8 @@ public class RegistrationSystem implements Serializable {
               System.out.println("To view available courses, press 2.");
               System.out.println("To view all courses, press 3.");
               System.out.println("To view registered courses, press 4.");
-              System.out.println("To register a course, press 5.");
-              System.out.println("To unregister a course, press 6.");
+              System.out.println("To register for a course, press 5.");
+              System.out.println("To unregister from a course, press 6.");
               System.out.println("To save changes, press 7.");
               System.out.println("To save and exit, press 8.");
               int number = userInputScanner.nextInt();
@@ -319,7 +321,7 @@ public class RegistrationSystem implements Serializable {
                     System.out.println("*************************************************");
                   } else {
                       // Failed to find student in studentList
-                      System.out.println("**************Could not find student enrolled. Try again or quit and register.**************");
+                      System.out.println("**************Could not find student enrolled. Try again or register a new account.**************");
                   }
                   courseRegistration();
               } else if (number == 5) {
@@ -342,7 +344,8 @@ public class RegistrationSystem implements Serializable {
                           // Register for course
                           boolean enrollmentStatus = courseList.registerForCourse(courseId, student);
                           if(enrollmentStatus == false) {
-                              System.out.println("**************Student course registration failed**************");
+                              System.out.println("**************Student course registration failed - Class is full**************");
+                              courseRegistration();
                           } else {
                               System.out.println("**************Registered for course**************");
                               // Add course to student's courseList
