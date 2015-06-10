@@ -27,6 +27,17 @@ public class Student extends Person implements Serializable {
       return super.getSsn();
   }
 
+  // Check if registered for course
+  public boolean isRegistered(Course course) {
+	  for(Course c: courseList) {
+		  if(c.equals(course)) {
+			  return true;
+		  }
+	  }
+	  return false;
+  }
+
+  // Add course to Student's courseList
   public void registerForCourse(Course course) {
 	  courseList.add(course);
 	  if(courseList.size() > 1) {

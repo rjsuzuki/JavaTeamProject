@@ -127,7 +127,6 @@ public class RegistrationSystem implements Serializable {
           else {
             System.out.println("Thank you.");
           }
-
           if (userLastName.matches(".*[^a-zA-Z0-9 ].*")) {
             System.out.println("*****Error, please do not use numbers or special characters.*****");
             System.out.println("Please enter your last name: ");
@@ -135,7 +134,6 @@ public class RegistrationSystem implements Serializable {
           } else {
             System.out.println("Thank you.");
           }
-
           if (userAge < 1) {
             System.out.println("*******Error, this is not possible.*******");
             System.out.println("Please enter your age: ");
@@ -143,8 +141,6 @@ public class RegistrationSystem implements Serializable {
           } else {
             System.out.println("Thank you.");
           }
-
-
           if (userGender != 'M' || userGender != 'F') {
             System.out.println("*****Error, please enter M or F only*****");
             System.out.println("Please enter your gender (M/F): ");
@@ -152,7 +148,6 @@ public class RegistrationSystem implements Serializable {
           } else {
             System.out.println("Thank you.");
           }
-
           if (userSsn.length() < 9 || userSsn.length() > 9) {
             System.out.println("*****Error, valid social security numbers are 9-digits in length.*****");
             System.out.println("Please enter your SSN: ");
@@ -160,7 +155,6 @@ public class RegistrationSystem implements Serializable {
           } else {
             System.out.println("Thank you.");
           }
-
           if (studentId.length() < 5 || studentId.length() > 5) {
             System.out.println("*****Error, valid student ID's are 5-digits in length.*****");
             System.out.println("Please enter a 5-digit student ID number:");
@@ -330,15 +324,22 @@ public class RegistrationSystem implements Serializable {
                       }
                   }
                   if(student != null) {
-                      // Register for course
-                      boolean enrollmentStatus = courseList.registerForCourse(courseId, student);
-                      if(enrollmentStatus == false) {
-                          System.out.println("**************Student course registration failed**************");
-                      } else {
-                          System.out.println("**************Registered for course**************");
-                          // Add course to student's courseList
-                          student.registerForCourse(courseList.getCourse(courseId));
-                          courseRegistration();
+                	  // Check student is not already registered for course
+                	  Course registerCourse = courseList.getCourse(courseId);
+                	  if(!student.isRegistered(registerCourse) && !registerCourse.isStudent(student)) {
+                          // Register for course
+                          boolean enrollmentStatus = courseList.registerForCourse(courseId, student);
+                          if(enrollmentStatus == false) {
+                              System.out.println("**************Student course registration failed**************");
+                          } else {
+                              System.out.println("**************Registered for course**************");
+                              // Add course to student's courseList
+                              student.registerForCourse(registerCourse);
+                              courseRegistration();
+                          }
+                	  } else {
+                		  System.out.println("**************Student already registered for course id=" + courseId + ".**************");
+                          courseRegistration();  
                       }
                   } else {
                       // Failed to find student in studentList
@@ -375,17 +376,25 @@ public class RegistrationSystem implements Serializable {
                       }
                   }
                   if(student != null) {
-                      // Register for course
-                      boolean enrollmentStatus = courseList.unregisterForCourse(courseId, student);
-                      if(enrollmentStatus == false) {
-                          System.out.println("**************Course unregistration failed**************");
-                          courseRegistration();
+                	  // Check student is registered for course
+                	  Course unregisterCourse = courseList.getCourse(courseId);
+                	  if(student.isRegistered(unregisterCourse) && unregisterCourse.isStudent(student)) {
+                          // Unregister for course
+                          boolean enrollmentStatus = courseList.unregisterForCourse(courseId, student);
+                          if(enrollmentStatus == false) {
+                              System.out.println("**************Course unregistration failed**************");
+                              courseRegistration();
+                          } else {
+                              System.out.println("**************Unregistered for course**************");
+                              // Remove course to student's courseList
+                              student.unregisterForCourse(courseList.getCourse(courseId));
+                              courseRegistration();
+                          }
                       } else {
-                          System.out.println("**************Unregistered for course**************");
-                          // Remove course to student's courseList
-                          student.unregisterForCourse(courseList.getCourse(courseId));
+                          System.out.println("**************Course unregistration failed, student not registered for course id=" + courseId + "**************");
                           courseRegistration();
                       }
+ 
                   }
 
 
