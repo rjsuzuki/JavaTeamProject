@@ -326,12 +326,15 @@ public class RegistrationSystem implements Serializable {
                   courseRegistration();
               } else if (number == 5) {
                   System.out.println("Enter course id");
-                  int courseId = userInputScanner.nextInt();
-                  while(!courseList.isCourse(courseId)) {
+                  String courseIdString = userInputScanner.next();
+                  while((courseIdString.matches(".*[^0-9].*")) || 
+                		  (!courseList.isCourse(Integer.parseInt(courseIdString)))) {
                 	  System.out.println("*****Error, invalid course id*****");
                 	  System.out.println("Enter course id");
-                	  courseId = userInputScanner.nextInt();
+                	  courseIdString = userInputScanner.next();
                   }
+                  int courseId = Integer.parseInt(courseIdString);
+
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
                   String ssn = userInputScanner.next();
@@ -384,12 +387,16 @@ public class RegistrationSystem implements Serializable {
 
               else if (number == 6) {
                   System.out.println("Enter course id");
-                  int courseId = userInputScanner.nextInt();
-                  while(!courseList.isCourse(courseId)) {
+                  
+                  String courseIdString = userInputScanner.next();
+                  while((courseIdString.matches(".*[^0-9].*")) || 
+                		  (!courseList.isCourse(Integer.parseInt(courseIdString)))) {
                 	  System.out.println("*****Error, invalid course id*****");
                 	  System.out.println("Enter course id");
-                	  courseId = userInputScanner.nextInt();
+                	  courseIdString = userInputScanner.next();
                   }
+                  int courseId = Integer.parseInt(courseIdString);
+  
                   // NOTE: should be ssn or student id
                   System.out.println("Enter Social Security Number");
                   String ssn = userInputScanner.next();
