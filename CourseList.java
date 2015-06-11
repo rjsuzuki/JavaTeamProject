@@ -130,6 +130,14 @@ public class CourseList {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+		}
+		public boolean isCourse(int courseId) {
+			for(Course c: courseList) {
+				if(c.getCourseId() == courseId) {
+					return true;
+				}
 			}
+			return false;
+		}
 
 }
